@@ -1,5 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 
-#custom 
+# Generated Files and such
 *.import
+
+# NixOS-specific Ignores
+**/result
+**/.envrc
+**/.direnv

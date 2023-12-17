@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}
+
+% European Style Geometry
+\usepackage[
+  margin=1.25in,
+  top=0.75in
+]{geometry}
+
+% Change Font
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
+
+\title{MazeShift Mayhem}
+\author{Roman Shchekotov}
+\date{\today}
+
+% Redefine Title Macro
+\makeatletter
+\def\@maketitle{%
+  \begin{center}
+    {
+      \bfseries \huge \@title\\
+      Design Document \par
+    }
+    \vskip 1.5em
+    \large By {\@author} for practice purposes
+  \end{center}
+  \makebox[0.8\linewidth][c]{\rule{\paperwidth}{0.4pt}}
+}
+\makeatother
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \section{Introduction}
+  \subsection{Game Summary}
+  \subsection{Player Experience}
+  \subsection{Platform}
+  \subsection{Development Software}
+  \subsection{Genre}
+  \subsection{Target Audience}
+  \section{Concept}
+  \subsection{Gameplay Overview}
+  \subsection{Primary Mechanics}
+  \subsection{Secondary Mechanics}
+  \section{Art}
+  \subsection{Design}
+  \section{Audio}
+  \subsection{Music}
+  \subsection{Sound Effects}
+  \section{Game Experience}
+  \subsection{UI}
+  \subsection{Controls}
+  \section{Development Timeline}
+\end{document}
