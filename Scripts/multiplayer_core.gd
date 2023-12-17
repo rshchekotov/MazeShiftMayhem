@@ -1,44 +1,51 @@
-# multiplayer.gd
 extends Node
 
 const PORT = 7000
 
 func _ready():
+	# Start paused
 	get_tree().paused = true
+	# You can save bandwith by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 
+	# Automatically start the server in headless mode.
 	if DisplayServer.get_name() == "headless":
+		print("Automatically starting dedicated server")
 		_on_host_pressed.call_deferred()
 
 
 func _on_host_pressed():
+	# Start as server
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		print("fail")
+		OS.alert("Failed to start multiplayer server")
 		return
 	multiplayer.multiplayer_peer = peer
 	start_game()
 
 
-func _on_server_ip_text_submitted(txt):
+func _on_connect_by_ip_text_submitted(txt):
+	# Start as client
 	if txt == "":
-		print("Need a remote to connect to.")
+		OS.alert("Need a remote to connect to.")
 		return
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(txt, PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		print("Failed to start multiplayer client.")
+		OS.alert("Failed to start multiplayer client")
 		return
 	multiplayer.multiplayer_peer = peer
 	start_game()
-	
+
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
 	get_tree().paused = false
+	# Only change level on the server.
+	# Clients will instantiate the level via the spawner.
 	if multiplayer.is_server():
-		change_level.call_deferred(load("res://Scenes/map.tscn"))
+		change_level.call_deferred(load("res://Scenes/LevelBase.tscn"))
 
 
 # Call this function deferred and only on the main authority (server).
@@ -51,11 +58,9 @@ func change_level(scene: PackedScene):
 	# Add new level.
 	level.add_child(scene.instantiate())
 
-
-# The server can restart the level by pressing Home.
+# The server can restart the level by pressing HOME.
 func _input(event):
 	if not multiplayer.is_server():
 		return
 	if event.is_action("ui_home") and Input.is_action_just_pressed("ui_home"):
-		print("hi hi")
-		change_level.call_deferred(load("res://Scenes/map.tscn"))
+		change_level.call_deferred(load("res://Scenes/LevelBase.tscn"))

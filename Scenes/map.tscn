@@ -1,6 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3u72xr35r4eu"]
+[gd_scene load_steps=13 format=3 uid="uid://d3u72xr35r4eu"]
 
-[ext_resource type="Script" path="res://Scenes/Level.gd" id="1_p1r78"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1sy5v"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_mjj5v"]
+sky_material = SubResource("ProceduralSkyMaterial_1sy5v")
+
+[sub_resource type="Environment" id="Environment_pi4dw"]
+background_mode = 2
+sky = SubResource("Sky_mjj5v")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_d4cgq"]
 albedo_color = Color(0.945098, 0.898039, 0.858824, 1)
@@ -31,7 +42,9 @@ data = PackedVector3Array(4, 0, 4, -4, 0, 4, 4, 0, -4, -4, 0, 4, -4, 0, -4, 4, 0
 data = PackedVector3Array(4, 0, 4, -4, 0, 4, 4, 0, -4, -4, 0, 4, -4, 0, -4, 4, 0, -4)
 
 [node name="Map" type="Node3D"]
-script = ExtResource("1_p1r78")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pi4dw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.53131, 0.847178, 0, -0.847178, 0.53131, 0, 4.21622, 1.71596)
@@ -96,10 +109,3 @@ shape = SubResource("ConcavePolygonShape3D_hx7aa")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.22147, -3)
-
-[node name="Players" type="Node3D" parent="."]
-
-[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/multi_player.tscn")
-spawn_path = NodePath("../Players")
-spawn_limit = 4

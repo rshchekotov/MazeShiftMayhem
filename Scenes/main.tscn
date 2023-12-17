@@ -1,7 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dueu2e6asiwww"]
+[gd_scene load_steps=4 format=3 uid="uid://dueu2e6asiwww"]
 
-[ext_resource type="PackedScene" uid="uid://dcqh4twoh35ac" path="res://Scenes/multiplayer_core.tscn" id="1_3n2df"]
+[ext_resource type="PackedScene" uid="uid://bvnwjpd0f3oa0" path="res://Scenes/multiplayer_main.tscn" id="1_i0wlc"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jpokb"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_l1vn2"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [node name="Main" type="Node"]
 
-[node name="MultiplayerCore" parent="." instance=ExtResource("1_3n2df")]
+[node name="Multiplayer" parent="." instance=ExtResource("1_i0wlc")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D"]
+mesh = SubResource("PlaneMesh_jpokb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_l1vn2")

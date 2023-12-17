@@ -1,4 +1,3 @@
-# level.gd
 extends Node3D
 
 const SPAWN_RANDOM := 5.0
@@ -11,7 +10,7 @@ func _ready():
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(del_player)
 
-	# Spawn already connected players.
+	# Spawn already connected players
 	for id in multiplayer.get_peers():
 		add_player(id)
 
@@ -30,12 +29,12 @@ func _exit_tree():
 func add_player(id: int):
 	var character = preload("res://Scenes/multi_player.tscn").instantiate()
 	# Set player id.
-	print(id)
 	character.player = id
 	# Randomize character position.
 	var pos := Vector2.from_angle(randf() * 2 * PI)
 	character.position = Vector3(pos.x * SPAWN_RANDOM * randf(), 0, pos.y * SPAWN_RANDOM * randf())
 	character.name = str(id)
+	character.rotation.x = 0;
 	$Players.add_child(character, true)
 
 

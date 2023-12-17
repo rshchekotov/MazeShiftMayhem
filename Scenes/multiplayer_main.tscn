@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvnwjpd0f3oa0"]
+
+[ext_resource type="Script" path="res://Scripts/multiplayer_core.gd" id="1_jiv4u"]
+
+[node name="Multiplayer" type="Node"]
+script = ExtResource("1_jiv4u")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/LevelBase.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="UI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="HBoxContainer" parent="UI"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 31.0
+
+[node name="Host" type="Button" parent="UI/Options"]
+layout_mode = 2
+text = "Host"
+
+[node name="ConnectByIP" type="LineEdit" parent="UI/Options"]
+layout_mode = 2
+placeholder_text = "127.0.0.1"
+expand_to_text_length = true
+
+[connection signal="pressed" from="UI/Options/Host" to="." method="_on_host_pressed"]
+[connection signal="text_submitted" from="UI/Options/ConnectByIP" to="." method="_on_connect_by_ip_text_submitted"]
