@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk3dtwboaj7j8"]
+
+[ext_resource type="Script" path="res://Scripts/multi_player_movement.gd" id="1_3yipb"]
+[ext_resource type="Script" path="res://Scripts/InputSynchronizer.gd" id="2_q3is5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k8qj5"]
+properties/0/path = NodePath("CharacterBody3D:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("CharacterBody3D:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("CharacterBody3D:velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vog36"]
+properties/0/path = NodePath("InputSynchronizer:direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hd1be"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71elm"]
+
+[node name="MultiPlayer" type="CharacterBody3D"]
+script = ExtResource("1_3yipb")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_k8qj5")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_vog36")
+script = ExtResource("2_q3is5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_hd1be")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_71elm")
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]

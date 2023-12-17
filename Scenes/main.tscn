@@ -1,14 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dueu2e6asiwww"]
+[gd_scene load_steps=2 format=3 uid="uid://dueu2e6asiwww"]
 
-[ext_resource type="PackedScene" uid="uid://c4qvums6vbo0l" path="res://Scenes/server_ui.tscn" id="1_b8lj2"]
-[ext_resource type="PackedScene" uid="uid://d3u72xr35r4eu" path="res://Scenes/map.tscn" id="2_4hheg"]
-[ext_resource type="PackedScene" uid="uid://bp1idjs03xumg" path="res://Scenes/player.tscn" id="3_0l61i"]
+[ext_resource type="PackedScene" uid="uid://dcqh4twoh35ac" path="res://Scenes/multiplayer_core.tscn" id="1_3n2df"]
 
 [node name="Main" type="Node"]
 
-[node name="Server_UI" parent="." instance=ExtResource("1_b8lj2")]
-
-[node name="Map" parent="." instance=ExtResource("2_4hheg")]
-
-[node name="Player" parent="." instance=ExtResource("3_0l61i")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 2.63723, 0.409313, 0)
+[node name="MultiplayerCore" parent="." instance=ExtResource("1_3n2df")]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcqh4twoh35ac"]
+
+[ext_resource type="Script" path="res://Scripts/multiplayer_core.gd" id="1_3vd5i"]
+
+[node name="MultiplayerCore" type="Node"]
+process_mode = 3
+script = ExtResource("1_3vd5i")
+
+[node name="Level" type="Node" parent="."]
+process_mode = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+process_mode = 1
+_spawnable_scenes = PackedStringArray("res://Scenes/map.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="UI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Host" type="Button" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "Host new Server"
+
+[node name="ServerIP" type="LineEdit" parent="UI/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "ServerIP"
+expand_to_text_length = true
+
+[connection signal="pressed" from="UI/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="text_submitted" from="UI/HBoxContainer/ServerIP" to="." method="_on_server_ip_text_submitted"]
