@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper,12pt]{article}
 
 % European Style Geometry
 \usepackage[
@@ -10,6 +10,35 @@
 \usepackage[scaled]{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage[T1]{fontenc}
+
+% Remove Section Numbers
+\setcounter{secnumdepth}{0}
+
+% Indent Section
+\usepackage{titlesec}
+\usepackage{changepage}
+\usepackage{etoolbox}
+%% indent definitions
+\newlength{\sectionindent}
+\setlength{\sectionindent}{0cm}
+\newlength{\subsectionindent}
+\setlength{\subsectionindent}{1cm}
+%% section spacing
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}
+  {\sectionindent}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+%% subsection spacing
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}
+  {\subsectionindent}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%% section content spacing
+%\preto{\section}{\noexpand\begin{adjustwidth}{\sectionindent}{0pt}}
+%\appto{\section}{\noexpand\end{adjustwidth}}
+%% subsection content spacing
+%\preto{\subsection}{subsec-start}%{\begin{adjustwidth}{\subsectionindent}{0pt}}
+%\appto{\subsection}{subsect-end}%{\end{adjustwidth}}
 
 \title{MazeShift Mayhem}
 \author{Roman Shchekotov}
@@ -26,7 +55,7 @@
     \vskip 1.5em
     \large By {\@author} for practice purposes
   \end{center}
-  \makebox[0.8\linewidth][c]{\rule{\paperwidth}{0.4pt}}
+  \makebox[\linewidth][c]{\rule{0.9\linewidth}{0.4pt}}
 }
 \makeatother
 
@@ -36,6 +65,10 @@
 
   \section{Introduction}
   \subsection{Game Summary}
+  ``Maze Shift Mayhem'' is a ``Search-and-Destroy''-type of team game based
+  in a Dungeon, with shifting rooms full of traps prepared by the defenders
+  for the raiders to discover.
+  \subsection{Inspiration}
   \subsection{Player Experience}
   \subsection{Platform}
   \subsection{Development Software}
