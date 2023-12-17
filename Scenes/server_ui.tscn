@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_k4cvl")
 
 [node name="Button" type="Button" parent="."]
@@ -27,22 +28,14 @@ offset_top = -4.0
 offset_bottom = 4.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 1
 icon = ExtResource("2_qegu3")
 script = ExtResource("1_jnlcn")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -33.5312
-offset_top = -15.5
-offset_right = 33.5312
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 94.0
+offset_bottom = 31.0
 placeholder_text = "Server IP"
 expand_to_text_length = true
 virtual_keyboard_enabled = false
