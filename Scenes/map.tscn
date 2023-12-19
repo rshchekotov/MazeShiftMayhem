@@ -1,4 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3u72xr35r4eu"]
+[gd_scene load_steps=14 format=3 uid="uid://d3u72xr35r4eu"]
+
+[ext_resource type="PackedScene" uid="uid://c6br8h3si2ypg" path="res://Scenes/sphere.tscn" id="1_w5iwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1sy5v"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -109,3 +111,6 @@ shape = SubResource("ConcavePolygonShape3D_hx7aa")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.22147, -3)
+
+[node name="Sphere" parent="." instance=ExtResource("1_w5iwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08214, 2.84513, 0)

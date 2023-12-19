@@ -1,29 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw8w6clmxedi6"]
+[gd_scene load_steps=5 format=3 uid="uid://cw8w6clmxedi6"]
 
 [ext_resource type="Script" path="res://Scripts/multi_player.gd" id="1_s623t"]
-[ext_resource type="Script" path="res://Scripts/player_input.gd" id="2_q6fhb"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fb1vy"]
-properties/0/path = NodePath(".:player")
-properties/0/spawn = true
-properties/0/replication_mode = 0
-properties/1/path = NodePath(".:position")
-properties/1/spawn = true
-properties/1/replication_mode = 0
-properties/2/path = NodePath(".:velocity")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath(".:rotation")
-properties/3/spawn = true
-properties/3/replication_mode = 0
-properties/4/path = NodePath("Neck:rotation")
-properties/4/spawn = true
-properties/4/replication_mode = 0
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hoavk"]
-properties/0/path = NodePath(".:direction")
+properties/0/path = NodePath(".:velocity")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37qaq"]
 
@@ -35,11 +23,6 @@ script = ExtResource("1_s623t")
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_fb1vy")
 
-[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
-root_path = NodePath(".")
-replication_config = SubResource("SceneReplicationConfig_hoavk")
-script = ExtResource("2_q6fhb")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_37qaq")
@@ -48,8 +31,8 @@ shape = SubResource("CapsuleShape3D_37qaq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_jab13")
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50432, 0.04444)
+
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Neck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00432003, 0.04444)
