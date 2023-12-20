@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c40m48xtaats7"]
+[gd_scene load_steps=3 format=3 uid="uid://c40m48xtaats7"]
 
 [ext_resource type="Script" path="res://Scripts/multiplayer_core.gd" id="1_5ckvb"]
+[ext_resource type="Script" path="res://SaveSystem/Scripts/ServerIP.gd" id="2_g2rbe"]
 
 [node name="MultiplayerCore" type="Node"]
 process_mode = 3
@@ -22,28 +23,62 @@ _spawnable_scenes = PackedStringArray("res://Scenes/map.tscn")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
 
-[node name="UI" type="Control" parent="."]
+[node name="UI_Connection_Setup" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" parent="UI_Connection_Setup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+alignment = 1
 
-[node name="Host" type="Button" parent="UI/HBoxContainer"]
+[node name="-------------" type="Panel" parent="UI_Connection_Setup/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_Connection_Setup/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="Host_Creation_Text" type="Label" parent="UI_Connection_Setup/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host new server "
+horizontal_alignment = 1
+
+[node name="Host" type="Button" parent="UI_Connection_Setup/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host"
 
-[node name="ServerIP" type="LineEdit" parent="UI/HBoxContainer"]
+[node name="Label2" type="Label" parent="UI_Connection_Setup/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-placeholder_text = "127.0.0.1"
-expand_to_text_length = true
+text = "Connect to the server by IP:
+"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="UI/HBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="text_submitted" from="UI/HBoxContainer/ServerIP" to="." method="_on_server_ip_text_submitted"]
+[node name="ServerIP" type="LineEdit" parent="UI_Connection_Setup/HBoxContainer/VBoxContainer" groups=["multiplayer_settings"]]
+layout_mode = 2
+expand_to_text_length = true
+script = ExtResource("2_g2rbe")
+
+[node name="-------------2" type="Panel" parent="UI_Connection_Setup/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="UI_Connection_Setup/HBoxContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="text_submitted" from="UI_Connection_Setup/HBoxContainer/VBoxContainer/ServerIP" to="." method="_on_server_ip_text_submitted"]
